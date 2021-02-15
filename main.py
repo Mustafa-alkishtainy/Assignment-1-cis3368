@@ -19,7 +19,6 @@ def create_connection(host_name, user_name, user_password, db_name):
     except Error as e:
         print(f"the error '{e}' occured" )
     return connection
-create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
 
 def execute_query(connection, query):
     mycursor=connection.cursor()
@@ -30,6 +29,17 @@ def execute_query(connection, query):
     except Error as e:
         print(f"the error '{e}' occured")
 
+def read_query(connection, query):
+    mycursor= connection.cursor()
+    result= None
+    try:
+        mycursor.execute(query)
+        result = mycursor.fetchall()
+        return result
+    except Error as e:
+        print(f"the error '{e}' occured")
+
+create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
 
 
 contactDetail=""
