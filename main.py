@@ -1,46 +1,35 @@
 ##Mustafa Al-kishtainy
 ##professor Otoo 3368
 
+import mysql.connector
+import datetime
+from datetime import date
 
-id=""
-contactDetail=""
-creationDate=""
+db= mysql.connector.connect( 
+    host="cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com",
+    user="admin",
+    passwd="Daguy.jason.com",
+    database="cis3368v1db"
+)
+
+cursor=db.cursor()
+
+cd= datetime.datetime(2000,1,21)
+str_cd= cd.date().isoformat()
+addContact = "INSERT INTO contacts (contactDetails, creationDate) VALUES ('Tom cruse', '2021-02-14')"
+cursor.execute(db,addContact)
+
+db.commit()
 
 
-def Menu():
-    print("Menu: ")
-    print("a - Add contact")
-    print("d - Delete contact")
-    print("u - Update contact")
-    print("b - Output all contacts in alphabetical order")
-    print("c - Output all contacts by creation date")
-    print("q - Quit")
 
-Menu()
-choice = input("Choose an option: ")
+ 
 
-while choice != 'q':
-    if choice == 'a':
-        id= input("Enter user ID: ")
-        contactDetail= input("Enter contact details: ")
-        creationDate = input("On what date was this document created?:")
-    elif choice == 'd':
-        print('d')
-    elif choice == 'u':
-        print('u')
-    elif choice == 'b':
-        print('b')
-    elif choice == 'c':
-        print('c')
-    else: 
-        print("invalid")
-    
-    
-    print()
-    Menu()
-    choice = input("Choose an option: ")
 
-    
+        
+
+
+     
 
 
 
