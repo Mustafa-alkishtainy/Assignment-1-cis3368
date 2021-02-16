@@ -6,6 +6,7 @@ from mysql.connector import Error
 import datetime
 from datetime import date
 
+
 def create_connection(host_name, user_name, user_password, db_name):
     connection = None
     try: 
@@ -39,7 +40,7 @@ def read_query(connection, query):
     except Error as e:
         print(f"the error '{e}' occured")
 
-create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
+connection= create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
 
 
 contactDetail=""
@@ -52,11 +53,13 @@ def Menu():
     print("u - Update contact")
     print("b - Output all contacts in alphabetical order")
     print("c - Output all contacts by creation date")
+    print("o - Output all contacts")
     print("q - Quit")
 
 Menu()
 choice = input("Choose an option: ")
 while choice != 'q':
+    ##ADD CONTACTS##
     if choice == 'a':
         contactDetail= input("Enter contact details: ")
         creationDate = input("On what date was this document created?: ")
@@ -69,6 +72,18 @@ while choice != 'q':
         print('b')
     elif choice == 'c':
         print('c')
+        ##OUTPUTS ALL CONTACTS##
+    elif choice =='o': 
+        select_contacts= "SELECT * FROM contacts"
+        contacts =read_query(connection, select_contacts)
+        print("  ID" + "   DETAILS"+"       CREATION DATE")
+        print("------------------------------------")
+        for contact in contacts:
+            Id= contact[0]
+            contactDetail = contact[1]
+            creationDate= contact[2]
+            
+            print("{:^5} {:^5} {:>15}".format(str(Id), contactDetail, str(creationDate) ))       
     else: 
         print("invalid")
 
