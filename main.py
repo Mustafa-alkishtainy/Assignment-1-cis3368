@@ -3,8 +3,9 @@
 
 import mysql.connector
 from mysql.connector import Error
-import datetime
+import datetime as dt
 from datetime import date
+
 
 
 def create_connection(host_name, user_name, user_password, db_name):
@@ -59,22 +60,25 @@ def Menu():
 Menu()
 choice = input("Choose an option: ")
 while choice != 'q':
-    ##ADD CONTACTS##
+    ## ADD CONTACTS ##
     if choice == 'a':
         contactDetail= input("Enter contact details: ")
-        creationDate = input("On what date was this document created?: ")
+        creationDate = dt.date.today() ## automatically adds todays date 
         add_contact= "INSERT INTO contacts (contactDetails, creationDate) VALUES ('%s', '%s')" % (contactDetail, creationDate)
 
-        execute_query(connection,add_contact)            
+        execute_query(connection,add_contact)   
+    ## DELETE CONTACT ##         
     elif choice == 'd':
         print('d')
+        
+    ## UPDATE CONTACT ##
     elif choice == 'u':
         print('u')
     elif choice == 'b':
         print('b')
     elif choice == 'c':
         print('c')
-        ##OUTPUTS ALL CONTACTS##
+    ## OUTPUTS ALL CONTACTS ##
     elif choice =='o': 
         select_contacts= "SELECT * FROM contacts"
         contacts =read_query(connection, select_contacts)
