@@ -63,7 +63,9 @@ while choice != 'q':
     if choice == 'a':
         contactDetail= input("Enter contact details: ")
         creationDate = input("On what date was this document created?: ")
-            
+        add_contact= "INSERT INTO contacts (contactDetails, creationDate) VALUES ('%s', '%s')" % (contactDetail, creationDate)
+
+        execute_query(connection,add_contact)            
     elif choice == 'd':
         print('d')
     elif choice == 'u':
