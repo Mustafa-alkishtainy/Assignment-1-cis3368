@@ -69,11 +69,16 @@ while choice != 'q':
         execute_query(connection,add_contact)   
     ## DELETE CONTACT ##         
     elif choice == 'd':
-        print('d')
-        
+        choice = input("Enter the ID of the contact you would like to delete: ")
+        del_contact = "DELETE FROM contacts WHERE id = %s" %(choice)
+        execute_query(connection, del_contact)
     ## UPDATE CONTACT ##
     elif choice == 'u':
-        print('u')
+        contact_id = input("Enter the contact you would like to edit: ")
+        new_details = input("Enter the new contact deteails: ")
+
+        update_contact= "UPDATE contacts SET contactDetails = '%s' WHERE id = '%s' " %(new_details, contact_id)
+        execute_query(connection, update_contact)
     elif choice == 'b':
         print('b')
     elif choice == 'c':
