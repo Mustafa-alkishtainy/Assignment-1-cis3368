@@ -1,5 +1,5 @@
 ##Mustafa Al-kishtainy
-##professor Oto CIS3368
+##professor Dobretsberger CIS3368 
 
 import mysql.connector
 from mysql.connector import Error
@@ -7,7 +7,7 @@ import datetime as dt
 from datetime import date
 
 
-
+## THE CODE THAT GET THE USER INFO AND CONNECTES IT WITH DB ##
 def create_connection(host_name, user_name, user_password, db_name):
     connection = None
     try: 
@@ -21,7 +21,7 @@ def create_connection(host_name, user_name, user_password, db_name):
     except Error as e:
         print(f"the error '{e}' occured" )
     return connection
-
+## THE CODE THAT RUNS THE CODE WRITTEN FROM PYTHON TO THE SQL ##
 def execute_query(connection, query):
     mycursor=connection.cursor()
     try:
@@ -30,7 +30,7 @@ def execute_query(connection, query):
         print("Query ran successfuly")
     except Error as e:
         print(f"the error '{e}' occured")
-
+## THE CODE THAT GETS THE DATA FROM WORKBENCH INTO PYTHON ##
 def read_query(connection, query):
     mycursor= connection.cursor()
     result= None
@@ -41,7 +41,7 @@ def read_query(connection, query):
     except Error as e:
         print(f"the error '{e}' occured")
 
-################################# connects to workbench and AWS ###########################################
+################################# USER INFO THAT connects to workbench and AWS ###########################################
 connection= create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
 
 
@@ -62,7 +62,7 @@ Menu()
 choice = input("Choose an option: ")
 while choice != 'q':
     
-    ##################################### ADD CONTACTS ##########################################
+    ##################################### ADD CONTACTS TO DB ##########################################
     
     if choice == 'a':
         contactDetail= input("Enter contact details: ")
@@ -70,14 +70,14 @@ while choice != 'q':
         add_contact= "INSERT INTO contacts (contactDetails, creationDate) VALUES ('%s', '%s')" % (contactDetail, creationDate)    
         execute_query(connection,add_contact)   
     
-    ##################################### DELETE CONTACT ##########################################         
+    ##################################### DELETE CONTACT FROM DB ##########################################         
     
     elif choice == 'd':
         choice = input("Enter the ID of the contact you would like to delete: ")
         del_contact = "DELETE FROM contacts WHERE id = %s" %(choice)
         execute_query(connection, del_contact)
     
-    ##################################### UPDATE CONTACT #############################################
+    ##################################### UPDATE CONTACT TO DB #############################################
     
     elif choice == 'u':
         contact_id = input("Enter the contact you would like to update: ")
@@ -85,7 +85,7 @@ while choice != 'q':
         update_contact= "UPDATE contacts SET contactDetails = '%s' WHERE id = '%s' " %(new_details, contact_id)
         execute_query(connection, update_contact)
    
-    ############################## PRINT CONTACT NAME BY ALPHABETICAL ORDER ######################################
+    ############################## PRINT CONTACT NAME BY ALPHABETICAL ORDER ################################
     
     elif choice == 'b':
         select_contacts= "SELECT * FROM contacts ORDER BY contactDetails"
@@ -99,7 +99,7 @@ while choice != 'q':
             
             print("{:^5} {:^5} {:>15}".format(str(Id), contactDetail, str(creationDate) )) 
    
-    ################################### Output all contacts by creation date ################################################################
+    ################################### OUTPUT ALL CONTACTS BY CREATION DATE ################################
     
     elif choice == 'c':
         select_contacts= "SELECT * FROM contacts ORDER BY creationDate"
@@ -113,12 +113,12 @@ while choice != 'q':
             
             print("{:^5} {:^5} {:>15}".format(str(Id), contactDetail, str(creationDate) )) 
     
-    ################################### OUTPUTS ALL CONTACTS ##################################
+    ################################### OUTPUTS ALL CONTACTS #################################################
     
     elif choice =='o': 
         select_contacts= "SELECT * FROM contacts"
         contacts =read_query(connection, select_contacts)
-        print(" ID" + "   DETAILS"+"       CREATION DATE")
+        print(" ID" + "   DETAILS"+"        CREATION DATE")
         print("------------------------------------")
         for contact in contacts:
             Id= contact[0]
