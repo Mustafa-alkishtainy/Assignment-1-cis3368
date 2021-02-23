@@ -80,7 +80,7 @@ while choice != 'q':
     ##################################### UPDATE CONTACT #############################################
     
     elif choice == 'u':
-        contact_id = input("Enter the contact you would like to edit: ")
+        contact_id = input("Enter the contact you would like to update: ")
         new_details = input("Enter the new contact deteails: ")
         update_contact= "UPDATE contacts SET contactDetails = '%s' WHERE id = '%s' " %(new_details, contact_id)
         execute_query(connection, update_contact)
