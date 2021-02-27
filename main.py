@@ -1,5 +1,7 @@
-##Mustafa Al-kishtainy
-##professor Dobretsberger CIS3368 
+## Mustafa Al-kishtainy
+## professor Dobretsberger 
+## CIS3368 
+## SAT 11AM 
 
 import mysql.connector
 from mysql.connector import Error
@@ -43,10 +45,6 @@ def read_query(connection, query):
 
 ################################# USER INFO THAT connects to workbench and AWS ###########################################
 connection= create_connection("cis3368v1.cl3c9tgm8sn0.us-east-2.rds.amazonaws.com","admin","Daguy.jason.com","cis3368v1db")
-
-
-contactDetail=""
-creationDate=""
 
 def Menu():
     print("Menu: ")
